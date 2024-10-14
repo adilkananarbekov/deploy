@@ -1,0 +1,116 @@
+.testimonials-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 100px;
+    padding-left: 60px;
+    max-width: 1920px;
+    padding-bottom: 60px;
+  }
+  
+  .testimonials-text {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+  }
+  
+  .testimonial-heading {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 6vw;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: black; 
+  }
+  
+  .testimonial-quote {
+    align-items: start;
+    width: fit-content;
+    height: 160px;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    margin: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #D1D1D1;
+    border-radius: 11px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);  
+  }
+
+  .vector{
+    height: 40px;
+    width: 40px;
+  }
+  
+  .testimonial-name {
+    font-style: italic;
+    font-weight: 600;
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .testimonial-title {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.9em;
+  }
+  
+  .graphic-photo-container {
+    position: relative;
+    height: 100%;
+  }
+  
+  .graphic-element {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    z-index: -1;
+  }
+  
+  .photo {
+    width: 100%;
+    height: auto;
+    margin-left: 30px;
+  }
+  @media (min-width: 1920px){
+    .testimonial-heading{
+      font-size: 120px;
+    }
+  }
+  @media (max-width: 1000px) {
+    .testimonials-container {
+      padding-top: 20px;
+      flex-direction: column;
+      align-items: center; /* Centers the items vertically */
+      padding-left: 0; /* Adjust padding for mobile */
+    }
+    
+    .testimonials-text, .graphic-photo-container {
+      width: 100%; /* Make both elements take full width */
+      margin: 0; /* Remove left margin from the photo */
+      justify-items: end;
+    }
+    .graphic-photo-container{
+      display: flex;
+      justify-content: end;
+    }
+    .testimonial-heading{
+      margin-left: 5%;
+    }
+    .testimonial-quote{
+      width: 90%;
+      margin: 4% 5%;
+      overflow-y: hidden;
+      padding: 3%;
+      height: fit-content;
+    }
+    .photo {
+      margin-left: 0; /* Ensure photo doesn't have extra margin */
+      height: auto;
+      width: 50em;
+    }
+  }
+  
