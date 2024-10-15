@@ -23,9 +23,9 @@
             <img class="logo" src='{{ logo.logotype.url }}' alt='logo' id='logo'>
             <div class="nav-links">
                 <ul>
-                    <a href="#">Services</a>
-                    <a href="#">Portfolio</a>
-                    <a href="#">Email Marketing Audit</a>
+                    <a href="#Services">Services</a>
+                    <a href="#Portfolio">Portfolio</a>
+                    <a href="#Email">Email Marketing Audit</a>
                 </ul>
             </div>
             <div class="hamburger">
@@ -51,12 +51,9 @@
     </div>
 
     <div class="container-with-brands">
-        <img src="{% static "dynamic/images/lev haolan.svg" %}">
-        <img src="{% static "dynamic/images/Schneider.svg" %}">
-        <img src="{% static "dynamic/images/AliExpress.svg" %}">
-        <img src="{% static "dynamic/images/La Roche.svg" %}">
-        <img src="{% static "dynamic/images/Papa.svg" %}">
-        <img src="{% static "dynamic/images/KFC.svg" %}">
+        {% for brand in brands %}
+            <img src="{{ brand.image.url }}">
+        {% endfor %}
     </div>
     
     <div class="border-line-2"></div>
@@ -69,18 +66,16 @@
                     </h1>
                 </div>
                 <div class="right-b2">
-                    <li>Your email revenue is 20% or less</li>
-                    <li>You need ideas to grow your email channel</li>
-                    <li>You want expert help with implementing strategies</li>
-                    <li>Your competitors' emails outperform yours</li>
-                    <li>Email deliverability became a problem</li>
+                    {% for help in help_list %}
+                        <li>{{ help.we_help }}</li>
+                    {% endfor %}
                 </div>
             </div>
         </div>
         <img class="wave-pattern-left" src="{% static "dynamic/images/resource 2.svg" %}" alt="">
     </div>
     <div class="border-line-2"></div>
-    <div class="card-page-section">
+    <div class="card-page-section" id='Services'>
         <div class="carousel">
             <div class="card active">
                 <img src="{% static "dynamic/images/Rectangle 2.svg" %}">
@@ -129,19 +124,16 @@
     </div>
     <div class="border-line-2"></div>
     
-    <div class="content-page-4">
+    <div class="content-page-4" id='Portfolio'>
         <div class="content-banner-4">
             <div class="subscription-box-b4">
                 <div class="left-b4">
                     <h1 class="title-b4" id="title-b4">WE <span class="highlight"> TAKE CARE</span><br>OF ALL YOUR EMAIL <br>MARKETING ACTIVITIES</h1>
                 </div>
                 <div class="right-b4">
-                    <li>Planning</li>
-                    <li>Design</li>
-                    <li>Copywriting</li>
-                    <li>Analytics</li>
-                    <li>Deliverability</li>
-                    <li>Automation</li>
+                    {% for care in care_list %}
+                        <li>{{ care.take_care }}</li>
+                    {% endfor %}
                 </div>
             </div>
             <div class="bottom">
@@ -159,7 +151,7 @@
     </div>
     <div class="border-line "></div>
 
-    <div class="testimonials-container">
+    <div class="testimonials-container" id='Blog'>
         <div class="testimonials-text">
             <div class="testimonial-heading">TESTIMONIALS</div>
             {% for testi in testimonials %}
@@ -179,7 +171,7 @@
       
 
 <!-- SUBSCRIPTION CONTAINER -->
-    <div class="subscription-container">
+    <div class="subscription-container" id='Email'>
         <div class="subscription-box">
             <div class="left">
                 <h1 class="title">SUBSCRIBE <br>TO <span class="highlight">L.U.Y.E</span></h1>
@@ -193,10 +185,11 @@
                     <br><br>
                     <span class="cta-text">Let’s join forces and make your emails shine!</span>
                 </p>
-                <form class="subscription-form subscription-form-style">
+                <form class="subscription-form subscription-form-style" method="POST">
                     <label for="email" class="form-label">SUBSCRIBE TO <span class="highlight">L.U.Y.E.</span></label>
                     <div class="input-container">
-                        <input type="email" id="email" placeholder="Your Email" required>
+                        {% csrf_token %}
+                        <input type="email" id="email" placeholder="Your Email" name="email" required>
                         <button type="submit">SUBSCRIBE</button>
                     </div>
                 </form>
@@ -211,27 +204,27 @@
                 <img class="logo" src="{{ logo.logotype_footer.url }}" alt="logo" id="logo">
                 <div class="footer-col">
                     <ul>
-                        <li><a href="#">Services</a></li>
+                        <li><a href="#Services">Services</a></li>
                         <li><a href="#">About us</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <ul>
-                        <li><a href="#">Email Marketing Audit</a></li>
-                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#Email">Email Marketing Audit</a></li>
+                        <li><a href="#Portfolio">Portfolio</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <ul>    
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="#Blog">Blog</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <div class="social-links">
-                        <a href="#"><img src="{% static "dynamic/images/twitter-logo.svg" %}" alt="Twitter Logo"></a>
-                        <a href="#"><img src="{% static "dynamic/images/instagram-logo.svg" %}" alt="Instagram Logo"></a>
-                        <a href="#"><img src="{% static "dynamic/images/facebook-logo.svg" %}" alt="Facebook Logo"></a>
+                        {% for social in socials %}
+                            <a href='{{ social.link }}'><img src='{{ social.image.url }}'></a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
