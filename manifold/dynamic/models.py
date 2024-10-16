@@ -49,6 +49,20 @@ class TakeCare(models.Model):
     
 
 
+class CardSlider(models.Model):
+    company_logo = models.FileField(upload_to='images', validators=[FileExtensionValidator()])
+    result = models.CharField(max_length=20)
+    type = models.CharField(max_length=20)
+    company = models.CharField(max_length=30)
+    product = models.CharField(max_length=20)
+    platform = models.CharField(max_length=15)
+    card_in_slider = models.FileField(upload_to='images', validators=[FileExtensionValidator()])
+
+    def __str__(self):
+        return self.company
+
+
+
 
 class Testimonials(models.Model):
     author = models.CharField(max_length=50, default='Unknown')
