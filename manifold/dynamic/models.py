@@ -1,16 +1,29 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 import datetime
+from django.utils.deconstruct import deconstructible
+import os
+
+
+@deconstructible
+class FileExtensionValidator:
+    allowed_extensions = ['png', 'jpg', 'jpeg', 'svg']
+
+    def __call__(self, value):
+        ext = os.path.splitext(value.name)[1][1:].lower()
+        if ext not in self.allowed_extensions:
+            raise ValidationError(f'Unsupported file extension. Allowed extensions: {", ".join(self.allowed_extensions)}')
+
 
 class Logotype(models.Model):
-    logotype = models.ImageField(upload_to='images')
-    logotype_footer = models.ImageField(upload_to='images')
+    logotype_in_header = models.FileField(upload_to='images', validators=[FileExtensionValidator()])
+    logotype_in_footer = models.FileField(upload_to='images', validators=[FileExtensionValidator()])
 
 
 
 class Brand(models.Model):
     title = models.CharField(max_length=30)
-    image = models.ImageField(upload_to='images')
+    image = models.FileField(upload_to='images', validators=[FileExtensionValidator()])
 
     def __str__(self):
         return self.title
@@ -41,7 +54,6 @@ class Testimonials(models.Model):
     author = models.CharField(max_length=50, default='Unknown')
     publisher = models.CharField(max_length=50, default='Unknown')
     comment = models.TextField(default='Something')
-    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.author
@@ -63,7 +75,7 @@ class Subscribers(models.Model):
 class SocialMedia(models.Model):
     title = models.CharField(max_length=30)
     link = models.TextField()
-    image = models.ImageField()
+    image = models.FileField(upload_to='images', validators=[FileExtensionValidator()])
 
     def __str__(self):
         return self.title
